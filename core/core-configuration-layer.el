@@ -2469,10 +2469,6 @@ depends on it."
                  (cadr (assq 'recipe stats))
                  (cadr (assq 'local stats))
                  (cadr (assq 'built-in stats))))
-        (spacemacs-buffer//center-line)
-        (spacemacs-buffer/append (format "\n(%.3fs spent in your user-config)"
-                           dotspacemacs--user-config-elapsed-time))
-        (spacemacs-buffer//center-line)
         (insert "\n")))))
 
 (defun configuration-layer//get-indexed-elpa-package-names ()

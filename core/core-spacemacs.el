@@ -130,16 +130,16 @@ the final step of executing code in `emacs-startup-hook'.")
         (car dotspacemacs-default-font)))))
   ;; spacemacs init
   (setq inhibit-startup-screen t)
-  (spacemacs-buffer/goto-buffer)
-  (unless (display-graphic-p)
-    ;; explicitly recreate the home buffer for the first GUI client
-    ;; in order to correctly display the logo
-    (spacemacs|do-after-display-system-init
-     (kill-buffer (get-buffer spacemacs-buffer-name))
-     (spacemacs-buffer/goto-buffer)))
-  ;; This is set to nil during startup to allow Spacemacs to show buffers opened
-  ;; as command line arguments.
-  (setq initial-buffer-choice nil)
+  (when (spacemacs-buffer/goto-buffer)
+    (unless (display-graphic-p)
+      ;; explicitly recreate the home buffer for the first GUI client
+      ;; in order to correctly display the logo
+      (spacemacs|do-after-display-system-init
+       (kill-buffer (get-buffer spacemacs-buffer-name))
+       (spacemacs-buffer/goto-buffer)))
+    ;; This is set to nil during startup to allow Spacemacs to show buffers opened
+    ;; as command line arguments.
+    (setq initial-buffer-choice nil))
   (setq inhibit-startup-screen t)
   (require 'core-keybindings)
   ;; for convenience and user support
@@ -234,7 +234,6 @@ Note: the hooked function is not executed when in dumped mode."
        (spacemacs/load-theme spacemacs--delayed-user-theme
                              spacemacs--fallback-theme t))
      (configuration-layer/display-summary emacs-start-time)
-     (spacemacs-buffer//startup-hook)
      (spacemacs/check-for-new-version nil spacemacs-version-check-interval)
      (setq spacemacs-initialized t)
      (setq gc-cons-threshold (car dotspacemacs-gc-cons)
