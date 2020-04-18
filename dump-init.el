@@ -1,6 +1,15 @@
 (setq spacemacs-dump-mode 'dumping)
+
+(when load-file-name
+  (setq user-emacs-directory
+        (file-name-as-directory
+         (file-truename
+          (file-name-directory load-file-name)))))
+
+(setq spacemacs-start-directory user-emacs-directory)
+;; load early-init.el
+(load (concat spacemacs-start-directory "early-init.el"))
 ;; load init.el
-(setq spacemacs-start-directory (file-name-directory load-file-name))
 (load (concat spacemacs-start-directory "init.el"))
 ;; prepare the dump
 (spacemacs/dump-save-load-path)
