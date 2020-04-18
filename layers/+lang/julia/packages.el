@@ -15,7 +15,8 @@
     flycheck
     julia-mode
     julia-repl
-    lsp-julia
+    (lsp-julia :requires lsp-mode :toggle julia-mode-enable-lsp)
+    org
     ))
 
 (defun julia/init-julia-mode ()
@@ -106,3 +107,7 @@
 
 (defun julia/post-init-flycheck ()
   (spacemacs/enable-flycheck 'julia-mode))
+
+(defun julia/pre-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages '(julia . t))))
