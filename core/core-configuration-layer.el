@@ -2458,18 +2458,7 @@ depends on it."
           (float-time (time-subtract (current-time) emacs-start-time))))
   (let ((stats (configuration-layer/configured-packages-stats
                 configuration-layer--used-packages)))
-    (spacemacs-buffer/insert-page-break)
-    (with-current-buffer (get-buffer-create spacemacs-buffer-name)
-      (let ((buffer-read-only nil))
-        (spacemacs-buffer/append
-         (format "\n%s packages loaded in %.3fs (e:%s r:%s l:%s b:%s)"
-                 (cadr (assq 'total stats))
-                 configuration-layer--spacemacs-startup-time
-                 (cadr (assq 'elpa stats))
-                 (cadr (assq 'recipe stats))
-                 (cadr (assq 'local stats))
-                 (cadr (assq 'built-in stats))))
-        (insert "\n")))))
+    (spacemacs-buffer/insert-page-break)))
 
 (defun configuration-layer//get-indexed-elpa-package-names ()
   "Return a list of all ELPA packages in indexed packages and dependencies."

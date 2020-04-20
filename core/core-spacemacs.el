@@ -130,16 +130,6 @@ the final step of executing code in `emacs-startup-hook'.")
         (car dotspacemacs-default-font)))))
   ;; spacemacs init
   (setq inhibit-startup-screen t)
-  (when (spacemacs-buffer/goto-buffer)
-    (unless (display-graphic-p)
-      ;; explicitly recreate the home buffer for the first GUI client
-      ;; in order to correctly display the logo
-      (spacemacs|do-after-display-system-init
-       (kill-buffer (get-buffer spacemacs-buffer-name))
-       (spacemacs-buffer/goto-buffer)))
-    ;; This is set to nil during startup to allow Spacemacs to show buffers opened
-    ;; as command line arguments.
-    (setq initial-buffer-choice nil))
   (setq inhibit-startup-screen t)
   (require 'core-keybindings)
   ;; for convenience and user support
@@ -205,12 +195,6 @@ Note: the hooked function is not executed when in dumped mode."
   (add-hook
    'emacs-startup-hook
    (defun spacemacs/startup-hook ()
-     ;; This is set here so that emacsclient will show the startup buffer (and
-     ;; so that it can be changed in user-config if necessary). It was set to
-     ;; nil earlier in the startup process to properly handle command line
-     ;; arguments.
-     (setq initial-buffer-choice (lambda () (get-buffer spacemacs-buffer-name)))
-
      ;; Activate winner-mode for non dumped emacs sessions. Do this prior to
      ;; user-config to allow users to disable the feature and patch ediff
      ;; themselves. See issue 12582 for details.

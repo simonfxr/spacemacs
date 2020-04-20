@@ -16,9 +16,6 @@
 (defconst spacemacs-buffer-version-info "0.300"
   "Current version used to display addition release information.")
 
-(defconst spacemacs-buffer-name "*Messages*"
-  "The name of the spacemacs buffer.")
-
 (defconst spacemacs-buffer-logo-title "[S P A C E M A C S]"
   "The title displayed beneath the logo.")
 
