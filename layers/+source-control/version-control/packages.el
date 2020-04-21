@@ -12,7 +12,7 @@
 (setq version-control-packages
       '(
         browse-at-remote
-        (diff-hl            :toggle (eq 'diff-hl version-control-diff-tool))
+        diff-hl
         diff-mode
         evil-unimpaired
         (git-gutter         :toggle (eq 'git-gutter version-control-diff-tool))
@@ -121,6 +121,7 @@
 
 (defun version-control/init-diff-hl ()
   (use-package diff-hl
+    :if (eq 'diff-hl version-control-diff-tool)
     :defer t
     :init
     (progn
