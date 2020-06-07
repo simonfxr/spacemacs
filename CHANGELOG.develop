@@ -661,6 +661,7 @@ Other:
   - Replace =spacemacs/close-compilation-window= with
     =spacemacs/show-hide-compilation-window= (thanks to Hans Jang)
   - Avoid unnecessary packages installation of tern layer
+  - Fixed terminal mode line indicator overlapping (thanks to duianto)
 - Other:
   - New function =configuration-layer/message= to display message in
     =*Messages*= buffer (thanks to Sylvain Benner)
@@ -1433,6 +1434,7 @@ Other:
 **** Cfengine
 - New packages:
   - Added =ob-cfengine3= (thanks to Nick Anderson)
+  - Added =mustache-mode=
 - Improvements:
   - Configure =org-babel= for =cfengine= source blocks
    (thanks to Sylvain Benner)
@@ -3084,6 +3086,8 @@ Other:
 - Disabled =sbt-supershell= in =sbt-mode= (thanks to Rodolfo Hansen)
 - Enable new DAP and lsp-treemacs integration via metals
   (thanks to Rodolfo Hansen)
+- Turned off ability to convert to Unicode arrows deprecated in Scala (and remove
+  =scala-use-unicode-arrows= variable) (thanks to Keith Pinson)
 **** Scheme
 - Added missing =parinfer= package declaration (thanks to Kalle Lindqvist)
 - Update install docs for Chicken 5 changes (thanks to Grant Shangreaux)
@@ -3196,6 +3200,7 @@ Other:
 - Install orgit only when org package is used (thanks to Boris Buliga)
 - Defer git-gutter loading (thanks to Aaron Jensen)
 - Remove redundant arg from git-gutter timer (thanks to bmag)
+- Added Git Blame Transient State (thanks to duianto)
 **** Spotify
 - Replaced helm-spotify package with helm-spotify-plus
   (thanks to Leonard Lausen)
