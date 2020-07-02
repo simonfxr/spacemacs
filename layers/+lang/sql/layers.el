@@ -1,4 +1,4 @@
-;;; layers.el --- Slack layer layers File for Spacemacs
+;;; layers.el --- SQL Layer declarations File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2020 Sylvain Benner & Contributors
 ;;
@@ -9,4 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-(configuration-layer/declare-layer-dependencies '(emoji))
+(when (and (boundp 'sql-backend)
+           (eq sql-backend 'lsp))
+  (configuration-layer/declare-layer-dependencies '(lsp)))
