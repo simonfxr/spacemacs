@@ -1,6 +1,6 @@
 ;;; packages.el --- Helm Layer packages File
 ;;
-;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2020 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -21,6 +21,7 @@
         (helm-ls-git :require git)
         helm-make
         helm-mode-manager
+        helm-org
         helm-projectile
         helm-swoop
         helm-themes
@@ -319,6 +320,11 @@
       "hM"    'helm-switch-major-mode
       ;; "hm"    'helm-disable-minor-mode
       "h C-m" 'helm-enable-minor-mode)))
+
+(defun helm/init-helm-org ()
+  (use-package helm-org
+    :commands (helm-org-in-buffer-headings)
+    :defer (spacemacs/defer)))
 
 (defun helm/pre-init-helm-projectile ()
   ;; overwrite projectile settings

@@ -1,6 +1,6 @@
 ;;; funcs.el --- Spacemacs Defaults Layer functions File
 ;;
-;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2020 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -95,6 +95,17 @@ automatically applied to."
   :group 'spacemacs
   :type '(list symbol))
 
+(defun spacemacs/custom-newline (pos)
+  "Make `RET' in a Custom-mode search box trigger that field's action, rather
+than enter an actual newline, which is useless and unexpected in a search box.
+If not in such a search box, fall back on `Custom-newline'."
+  (interactive "d")
+  (let ((w (widget-at)))
+    (if (and w
+             (eq 'editable-field (widget-type w))
+             (string-prefix-p "Search" (widget-get w :help-echo)))
+        (funcall (widget-get w :action) w)
+      (Custom-newline pos))))
 
 ;; ido-mode remaps some commands to ido counterparts.  We want default Emacs key
 ;; bindings (those under C-x) to use ido, but we want to use the original
@@ -729,11 +740,12 @@ variable."
 
 
 
+;; adapted from bozhidar
+;; http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
 (defun spacemacs/find-user-init-file ()
   "Edit the `user-init-file', in the current window."
   (interactive)
-  (find-file-existing
-   (expand-file-name "init.el" user-emacs-directory)))
+  (find-file-existing user-init-file))
 
 (defun spacemacs/find-dotfile ()
   "Edit the `dotfile', in the current window."

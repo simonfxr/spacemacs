@@ -37,6 +37,7 @@
     (python :location built-in)
     pyvenv
     semantic
+    sphinx-doc
     smartparens
     stickyfunc-enhance
     xcscope
@@ -237,6 +238,17 @@
       (spacemacs/set-leader-keys-for-major-mode 'python-mode
         "rI" 'py-isort-buffer))))
 
+(defun python/init-sphinx-doc ()
+  (use-package sphinx-doc
+    :defer t
+    :init
+    (progn
+      (add-hook 'python-mode-hook 'sphinx-doc-mode)
+      (spacemacs/declare-prefix-for-mode 'python-mode "mS" "sphinx-doc")
+      (spacemacs/set-leader-keys-for-major-mode 'python-mode
+        "Se" 'sphinx-doc-mode
+        "Sd" 'sphinx-doc))))
+
 (defun python/pre-init-pyenv-mode ()
   (add-to-list 'spacemacs--python-pyenv-modes 'python-mode))
 (defun python/init-pyenv-mode ()
@@ -267,6 +279,7 @@
     :defer t
     :init
     (progn
+      (add-hook 'python-mode-hook #'pyvenv-tracking-mode)
       (pcase python-auto-set-local-pyvenv-virtualenv
         (`on-visit
          (dolist (m spacemacs--python-pyvenv-modes)
@@ -350,11 +363,14 @@
         "ri" 'spacemacs/python-remove-unused-imports
         "sB" 'spacemacs/python-shell-send-buffer-switch
         "sb" 'spacemacs/python-shell-send-buffer
+        "sE" 'spacemacs/python-shell-send-statement-switch
+        "se" 'spacemacs/python-shell-send-statement
         "sF" 'spacemacs/python-shell-send-defun-switch
         "sf" 'spacemacs/python-shell-send-defun
         "si" 'spacemacs/python-start-or-switch-repl
         "sR" 'spacemacs/python-shell-send-region-switch
-        "sr" 'spacemacs/python-shell-send-region)
+        "sr" 'spacemacs/python-shell-send-region
+        "sl" 'spacemacs/python-shell-send-line)
 
       ;; Set `python-indent-guess-indent-offset' to `nil' to prevent guessing `python-indent-offset
       ;; (we call python-indent-guess-indent-offset manually so python-mode does not need to do it)
